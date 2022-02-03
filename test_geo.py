@@ -30,13 +30,37 @@ def test_stations_within_radius():
 def test_rivers_with_station():
     """Test returning a set of rivers with a monitoring station"""
 
-    # complete
+    # Build list of stations 
+    stations = floodsystem.stationdata.build_station_list()
+
+    # List of rivers with a monitoring station
+    rivers = floodsystem.geo.rivers_with_station(stations)
+
+    assert len(rivers) > 0
+    assert type(rivers) == set
 
 
 def test_stations_by_river():
     """Test returning a dictionary of rivers with a list of station objects on each river"""
 
-    # complete
+    # Build list of stations 
+    stations = floodsystem.stationdata.build_station_list()
+
+    # List of rivers with a monitoring station
+    rivers = floodsystem.geo.rivers_with_station(stations)
+
+    # Dictionary of rivers with a list of station objects on each river
+    river_stations = floodsystem.geo.stations_by_river(stations)
+
+    # count the number of stations at River Cam
+    counter = 0
+    for station in stations:
+        if station.river == 'River Cam':
+            counter += 1
+    
+    assert counter == len(river_stations['River Cam'])
+    assert len(rivers) == len(river_stations)
+
 
 
 def test_rivers_by_station_number():

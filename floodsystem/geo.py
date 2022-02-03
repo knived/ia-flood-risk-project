@@ -7,7 +7,7 @@ geographical data.
 """
 
 from .utils import sorted_by_key  # noqa
-from haversine import haversine
+from haversine import haversine # noqa
 
 def stations_by_distance(stations, p):
     """Returns a list, sorted by distance, of (station, distance) tuples, where distance 
@@ -15,15 +15,8 @@ def stations_by_distance(stations, p):
     a list of MonitoringStation objects and p, which is a coordinate represented by a 
     tuple of floats."""
 
-    # empty list
-    list = []
-
-    # populate list with tuples of station name and distance to p
-    for station in stations:
-        list.append((station.name, haversine(station.coord, p)))
-
-    # return sorted list
-    return sorted_by_key(list, 1)
+    # return a sorted list by distance of a list of (station, distance) tuples 
+    return sorted_by_key([(station.name, haversine(station.coord, p)) for station in stations], 1)
 
 
 def stations_within_radius(stations, centre, r):
@@ -38,15 +31,37 @@ def rivers_with_station(stations):
     """Returns a set of rivers with a monitoring station. The input is stations, which 
     is a list of MonitoringStation objects."""
 
-    # complete
+    # return a set of rivers with at least one station
+    return {station.river for station in stations}
 
 
 def stations_by_river(stations):
     """Returns a dictionary of rivers with a list of station objects on each river. 
     The input is stations, which is a list of MonitoringStation objects."""
 
-    # complete
+    # list of rivers
+    rivers = rivers_with_station(stations)
 
+    # empty dictionary
+    river_dict = {}
+
+    # repeat for every river
+    for river in rivers:
+        # sorted list of stations at each river
+        tmp = []
+
+        for station in stations:
+            if river == station.river:
+                tmp.append(station.name)
+
+        tmp.sort()
+
+        # add river : [sorted stations at river] to dictionary
+        river_dict[river] = tmp
+
+    # return dictionary
+    return river_dict
+    
 
 def rivers_by_station_number(stations, N):
     """Return a list of N rivers, sorted by number of stations, of (river name, number of stations) 
