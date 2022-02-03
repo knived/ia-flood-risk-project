@@ -25,3 +25,9 @@ def test_create_monitoring_station():
     assert s.typical_range == trange
     assert s.river == river
     assert s.town == town
+
+
+def test_inconsistent_typical_range_stations():
+    """Test returning a list of stations that have inconsistent data"""
+
+    # complete
