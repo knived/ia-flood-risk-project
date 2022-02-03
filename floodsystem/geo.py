@@ -7,7 +7,7 @@ geographical data.
 """
 
 from .utils import sorted_by_key  # noqa
-from haversine import haversine # noqa
+from haversine import haversine  # noqa
 
 def stations_by_distance(stations, p):
     """Returns a list, sorted by distance, of (station, distance) tuples, where distance 
