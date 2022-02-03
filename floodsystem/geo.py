@@ -7,6 +7,7 @@ geographical data.
 """
 
 from .utils import sorted_by_key  # noqa
+from haversine import haversine
 
 def stations_by_distance(stations, p):
     """Returns a list, sorted by distance, of (station, distance) tuples, where distance 
@@ -14,7 +15,15 @@ def stations_by_distance(stations, p):
     a list of MonitoringStation objects and p, which is a coordinate represented by a 
     tuple of floats."""
 
-    # complete
+    # empty list
+    list = []
+
+    # populate list with tuples of station name and distance to p
+    for station in stations:
+        list.append((station.name, haversine(station.coord, p)))
+
+    # return sorted list
+    return sorted_by_key(list, 1)
 
 
 def stations_within_radius(stations, centre, r):

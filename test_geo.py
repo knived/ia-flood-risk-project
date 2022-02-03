@@ -1,11 +1,24 @@
 """Unit test for geo module"""
 
 import floodsystem.geo
+import floodsystem.stationdata
 
 def test_stations_by_distance():
     """Test returning a list of stations sorted by distance"""
 
-    # complete
+    # Build list of stations
+    stations = floodsystem.stationdata.build_station_list()
+
+    # Set coordinate to Cambridge city centre
+    p = (52.2053, 0.1218)
+
+    # List of tuples of station, distance
+    s_d = floodsystem.geo.stations_by_distance(stations, p)
+
+    assert len(s_d) > 0
+    assert s_d[0][1] < s_d[1][1]
+    assert s_d[-2][1] < s_d[-1][1]
+    assert len(s_d[0]) == 2
 
 
 def test_stations_within_radius():
