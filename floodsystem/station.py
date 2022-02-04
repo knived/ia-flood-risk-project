@@ -43,11 +43,20 @@ class MonitoringStation:
         """Return True if the data is consistent and False if 
         the data is inconsistent or unavailable."""
 
-        # complete
+        # inconsistent if data is unavailable
+        if self.typical_range == None:
+            return False
+        # inconsistent if low range is higher than high range
+        elif self.typical_range[0] > self.typical_range[1]:
+            return False
+        # else consistent
+        else:
+            return True
 
 
 def inconsistent_typical_range_stations(stations):
     """Returns a list of stations that have inconsistent data. The input 
     is stations, which is a list of MonitoringStation objects."""
 
-    # complete
+    # return list of stations with inconsistent data ranges
+    return [station.name for station in stations if station.typical_range_consistent() == False]
