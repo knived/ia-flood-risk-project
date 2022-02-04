@@ -1,5 +1,5 @@
 from floodsystem.stationdata import build_station_list
-import plotly.express as px
+import plotly.express as px  # noqa
 
 def run():
     """Requirements for Task Extension"""
