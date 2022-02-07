@@ -2,6 +2,7 @@
 
 import floodsystem.geo
 import floodsystem.stationdata
+from floodsystem.utils import sorted_by_key
 
 def test_stations_by_distance():
     """Test returning a list of stations sorted by distance"""
@@ -25,12 +26,13 @@ def test_stations_within_radius():
     """Test returning a list of stations within a specific radius"""
 
     #build list of stations and centre
-    stations = floodsystem.stationdata.build_station_list
+    stations = floodsystem.stationdata.build_station_list()
     centre = (52.2053, 0.1218)
 
     #test radius in function
     station_void = floodsystem.geo.stations_within_radius(stations, centre, 0)
     assert len(station_void) == 0
+
 
 
 def test_rivers_with_station():
@@ -70,6 +72,8 @@ def test_stations_by_river():
 
 
 def test_rivers_by_station_number():
-    """Test returning a list of N rivers sorted by the number of stations"""
-
-    # complete
+    """Test if list is sorted"""
+    stations = floodsystem.stationdata.build_station_list()
+    N = 9
+    assert floodsystem.geo.rivers_by_station_number(stations, N) == sorted(floodsystem.geo.rivers_by_station_number(stations, N), key = lambda x: x[1], reverse = True)
+    

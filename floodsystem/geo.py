@@ -6,6 +6,7 @@ geographical data.
 
 """
 
+from audioop import reverse
 from .utils import sorted_by_key  # noqa
 from haversine import haversine  # noqa
 
@@ -24,7 +25,7 @@ def stations_within_radius(stations, centre, r):
     The inputs are stations, which is a list of MonitoringStation objects, centre, which 
     is the geographic coordinate and r, which is the radius."""
 
-    # returns all station within radius of specified coordinate
+    # returns all station within radius of centre
     distances = stations_by_distance(stations, centre)
     stations_radius = []
     for distance in distances:
@@ -74,5 +75,17 @@ def rivers_by_station_number(stations, N):
     tuples. If there are more rivers with the same number of stations as the Nth entry, include 
     these rivers in the list. The inputs are stations, which is a list of MonitoringStation objects 
     and N, which is the number of rivers with the greatest number of stations."""
+   
+    #sorted list of rivers with number of stations in descending order  
+    river_stations_number = sorted_by_key([(river[0], len(river[1])) for river in stations_by_river(stations).items()], 1, reverse= True)
 
-    # complete
+    #Nth largest number of stations
+    max_stations = river_stations_number[N-1][1]
+
+    #list of rivers with number of stations up till Nth largest number
+    river_station_list = []
+    for river in river_stations_number:
+        if river[1] < max_stations:
+            break
+        river_station_list.append(river)
+    return river_station_list 
