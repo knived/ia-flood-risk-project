@@ -24,7 +24,13 @@ def test_stations_by_distance():
 def test_stations_within_radius():
     """Test returning a list of stations within a specific radius"""
 
-    #complete
+    #build list of stations and centre
+    stations = floodsystem.stationdata.build_station_list
+    centre = (52.2053, 0.1218)
+
+    #test radius in function
+    station_void = floodsystem.geo.stations_within_radius(stations, centre, 0)
+    assert len(station_void) == 0
 
 
 def test_rivers_with_station():
