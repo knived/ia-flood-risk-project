@@ -24,8 +24,14 @@ def stations_within_radius(stations, centre, r):
     The inputs are stations, which is a list of MonitoringStation objects, centre, which 
     is the geographic coordinate and r, which is the radius."""
 
-    # complete
-
+    # returns all station within radius of specified coordinate
+    distances = stations_by_distance(stations, centre)
+    stations_radius = []
+    for distance in distances:
+        if distance[1] < r:
+            stations_radius.append(distance[0])
+    stations_radius.sort()
+    return stations_radius
 
 def rivers_with_station(stations):
     """Returns a set of rivers with a monitoring station. The input is stations, which 
