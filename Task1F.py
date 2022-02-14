@@ -13,6 +13,7 @@ def run():
 
     # Print an alphabetically sorted list of station names with inconsistent data
     print(sort(inconsistent_stations))
+    
 
 if __name__ == "__main__":
     print("*** Task 1F: CUED Part IA Flood Warning System ***")

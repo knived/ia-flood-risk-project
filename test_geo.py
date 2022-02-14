@@ -34,7 +34,6 @@ def test_stations_within_radius():
     assert len(station_void) == 0
 
 
-
 def test_rivers_with_station():
     """Test returning a set of rivers with a monitoring station"""
 
@@ -68,7 +67,6 @@ def test_stations_by_river():
     
     assert counter == len(river_stations['River Cam'])
     assert len(rivers) == len(river_stations)
-
 
 
 def test_rivers_by_station_number():

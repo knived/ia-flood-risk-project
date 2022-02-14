@@ -37,15 +37,14 @@ def test_inconsistent_typical_range_stations():
     inconsistent_stations = floodsystem.station.inconsistent_typical_range_stations(stations)
 
     # count the number of inconsistent stations
-    counter1 = 0
-    counter2 = 0
+    counter = 0
 
     for station in stations:
         for name in inconsistent_stations:
             if station.name == name:
                 if station.typical_range == None:
-                    counter1 += 1
+                    counter += 1
                 elif station.typical_range[0] > station.typical_range[1]:
-                    counter1 += 1
+                    counter += 1
 
-    assert len(inconsistent_stations) == counter1
+    assert len(inconsistent_stations) == counter
