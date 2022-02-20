@@ -58,8 +58,14 @@ class MonitoringStation:
         Returns None if data is not available or is inconsistent"""
 
         # Return None if data is not available or is inconsistent
+        if self.latest_level == None:
+            return None
+        elif self.typical_range_consistent() == False:
+            return None
 
         # Return latest water level as a fraction of the typical range
+        else:
+            return float(self.latest_level/(self.typical_range[1] - self.typical_range[0]))
 
 
 def inconsistent_typical_range_stations(stations):
