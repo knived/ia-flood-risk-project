@@ -17,6 +17,9 @@ def stations_level_over_threshold(stations, tol):
     for station in stations:
         if station.relative_water_level() == None:
             pass
+        # ignoring the anomolous entry (Letcombe Basset)
+        elif station.name == 'Letcombe Bassett':
+            pass
         elif station.relative_water_level() > tol:
             list.append((station, station.relative_water_level()))
 
@@ -32,4 +35,15 @@ def stations_highest_rel_level(stations, N):
     level is highest in descending order where stations is a list of 
     MonitoringStation objects."""
 
-    # complete
+    # empty list
+    list = []
+
+    # list of sorted stations over threshold
+    stationsover = stations_level_over_threshold(stations, -100)
+
+    # append the N highest stations to list
+    for i in range(N):
+        list.append(stationsover[i][0])
+
+    # return sorted list
+    return list

@@ -65,7 +65,8 @@ class MonitoringStation:
 
         # Return latest water level as a fraction of the typical range
         else:
-            return float(self.latest_level/(self.typical_range[1] - self.typical_range[0]))
+            return (self.latest_level - self.typical_range[0])/(
+                        self.typical_range[1] - self.typical_range[0])
 
 
 def inconsistent_typical_range_stations(stations):
