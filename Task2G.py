@@ -1,11 +1,9 @@
 import datetime
-from distutils.command.build import build
 from floodsystem.datafetcher import fetch_measure_levels
 from floodsystem.stationdata import build_station_list, update_water_levels
 from floodsystem.flood import stations_highest_rel_level
 from floodsystem.analysis import polyfit
 import numpy as np
-from matplotlib.dates import date2num
 
 def run():
     """Requirements for Task 2G"""
@@ -25,10 +23,11 @@ def run():
     high=[]
     severe=[]
 
-    # List for dates and levels and use polyfit for predictions 
+ 
     dt = 10
     
     for station in stations:
+        # List for dates and levels and use polyfit for predictions 
         # ignore stations with errors
         try:
             dates, levels = fetch_measure_levels(station.measure_id, dt=datetime.timedelta(days=dt))
@@ -40,6 +39,7 @@ def run():
         
         # use predictions to calculate risks
         if station.typical_range == None:
+            print("{} has no water level range".format(station.name))
             continue
         water_level_range = station.typical_range[1] - station.typical_range[0]
         level_day_after = poly(1)
