@@ -55,12 +55,13 @@ def run():
         else:
             severe.append(station.name)
 
-    # print number of stations in each category
+    # print list of stations at severe risk and the number of stations in each category
+    print(severe)
     print("The number of stations at low risk are {}".format(len(low)))
     print("The number of stations at moderate risk are {}".format(len(moderate)))
     print("The number of stations at high risk are {}".format(len(high)))
     print("The number of stations at severe risk are {}".format(len(severe)))
-
+    
         
 
 
